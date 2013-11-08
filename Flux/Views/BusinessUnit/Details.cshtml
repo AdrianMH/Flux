@@ -1,0 +1,64 @@
+﻿@model Flux.Models.BusinessUnit
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>BusinessUnit</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Manager)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Manager)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Other)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Other)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTimeCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTimeCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTimeUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTimeUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserUpdated)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BusinessUnitId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

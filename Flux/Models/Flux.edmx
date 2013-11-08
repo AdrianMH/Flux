@@ -1,0 +1,642 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="FluxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="FluxModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="FluxModel.Store.__MigrationHistory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BusinessUnits" EntityType="FluxModel.Store.BusinessUnits" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Ccys" EntityType="FluxModel.Store.Ccys" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CcyXRates" EntityType="FluxModel.Store.CcyXRates" store:Type="Tables" store:Schema="dbo" store:Name="CcyXRates">
+            <DefiningQuery>SELECT 
+      [CcyXRates].[CCYXRateId] AS [CCYXRateId], 
+      [CcyXRates].[CcyId] AS [CcyId], 
+      [CcyXRates].[DateXRate] AS [DateXRate], 
+      [CcyXRates].[XRate] AS [XRate], 
+      [CcyXRates].[DateTimeCreated] AS [DateTimeCreated], 
+      [CcyXRates].[UserCreated] AS [UserCreated], 
+      [CcyXRates].[DateTimeUpdated] AS [DateTimeUpdated], 
+      [CcyXRates].[UserUpdated] AS [UserUpdated]
+      FROM [dbo].[CcyXRates] AS [CcyXRates]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Investments" EntityType="FluxModel.Store.Investments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Lookups" EntityType="FluxModel.Store.Lookups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LookupTypes" EntityType="FluxModel.Store.LookupTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="FluxModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Transactions" EntityType="FluxModel.Store.Transactions" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__CcyXRates__CcyId__5DCAEF64" Association="FluxModel.Store.FK__CcyXRates__CcyId__5DCAEF64">
+            <End Role="Ccys" EntitySet="Ccys" />
+            <End Role="CcyXRates" EntitySet="CcyXRates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Investments_BusinessUnits" Association="FluxModel.Store.FK_Investments_BusinessUnits">
+            <End Role="BusinessUnits" EntitySet="BusinessUnits" />
+            <End Role="Investments" EntitySet="Investments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookupTypes" Association="FluxModel.Store.FK_Lookups_LookupTypes">
+            <End Role="LookupTypes" EntitySet="LookupTypes" />
+            <End Role="Lookups" EntitySet="Lookups" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Transaction_Ccy" Association="FluxModel.Store.fk_Transaction_Ccy">
+            <End Role="Ccys" EntitySet="Ccys" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Investments" Association="FluxModel.Store.FK_Transactions_Investments">
+            <End Role="Investments" EntitySet="Investments" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="BusinessUnits">
+          <Key>
+            <PropertyRef Name="BusinessUnitId" />
+          </Key>
+          <Property Name="BusinessUnitId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Manager" Type="nvarchar" MaxLength="50" />
+          <Property Name="Other" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ccys">
+          <Key>
+            <PropertyRef Name="CCYId" />
+          </Key>
+          <Property Name="CCYId" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="CcyISO" Type="nvarchar" Nullable="false" MaxLength="3" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Flux.dbo.CcyXRates' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="CcyXRates">
+          <Key>
+            <PropertyRef Name="CCYXRateId" />
+            <PropertyRef Name="CcyId" />
+            <PropertyRef Name="DateXRate" />
+            <PropertyRef Name="XRate" />
+            <PropertyRef Name="DateTimeCreated" />
+            <PropertyRef Name="UserCreated" />
+            <PropertyRef Name="DateTimeUpdated" />
+            <PropertyRef Name="UserUpdated" />
+          </Key>
+          <Property Name="CCYXRateId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CcyId" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="DateXRate" Type="date" Nullable="false" />
+          <Property Name="XRate" Type="numeric" Nullable="false" Precision="20" Scale="8" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Investments">
+          <Key>
+            <PropertyRef Name="InvestmentId" />
+          </Key>
+          <Property Name="InvestmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="Ccy" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateFirstDrawdown" Type="datetime" Nullable="false" />
+          <Property Name="Descr" Type="nvarchar" MaxLength="200" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Lookups">
+          <Key>
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="LookupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="LookupTypeId" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Descr" Type="nvarchar" MaxLength="50" />
+          <Property Name="SortOrder" Type="int" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LookupTypes">
+          <Key>
+            <PropertyRef Name="LookupTypeId" />
+          </Key>
+          <Property Name="LookupTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Descr" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InvestmentId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="LandmarkAmount" Type="numeric" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="CcyId" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="DateTransfer" Type="datetime" Nullable="false" />
+          <Property Name="TimingId" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="FundVehicleId" Type="nvarchar" MaxLength="20" />
+          <Property Name="InvestmentAmount" Type="numeric" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="TransactionTypeId" Type="int" Nullable="false" />
+          <Property Name="CertaintyValueId" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="BoardApproved" Type="int" Nullable="false" />
+          <Property Name="FrequencyId" Type="int" Nullable="false" />
+          <Property Name="FrequencyDescr" Type="nvarchar" MaxLength="50" />
+          <Property Name="ReturnOfCapital" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="TaxPaid" Type="int" Nullable="false" />
+          <Property Name="GrossDistribution" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="Descr" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="DateTimeCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserCreated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DateTimeUpdated" Type="datetime" Nullable="false" />
+          <Property Name="UserUpdated" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ActualAmount" Type="numeric" Precision="20" Scale="2" />
+          <Property Name="ActualCcy" Type="nvarchar" MaxLength="3" />
+          <Property Name="ActualDateTransfer" Type="date" />
+          <Property Name="Comments" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Association Name="FK__CcyXRates__CcyId__5DCAEF64">
+          <End Role="Ccys" Type="FluxModel.Store.Ccys" Multiplicity="1" />
+          <End Role="CcyXRates" Type="FluxModel.Store.CcyXRates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ccys">
+              <PropertyRef Name="CCYId" />
+            </Principal>
+            <Dependent Role="CcyXRates">
+              <PropertyRef Name="CcyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Investments_BusinessUnits">
+          <End Role="BusinessUnits" Type="FluxModel.Store.BusinessUnits" Multiplicity="1" />
+          <End Role="Investments" Type="FluxModel.Store.Investments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessUnits">
+              <PropertyRef Name="BusinessUnitId" />
+            </Principal>
+            <Dependent Role="Investments">
+              <PropertyRef Name="BusinessUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookupTypes">
+          <End Role="LookupTypes" Type="FluxModel.Store.LookupTypes" Multiplicity="1" />
+          <End Role="Lookups" Type="FluxModel.Store.Lookups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTypes">
+              <PropertyRef Name="LookupTypeId" />
+            </Principal>
+            <Dependent Role="Lookups">
+              <PropertyRef Name="LookupTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Transaction_Ccy">
+          <End Role="Ccys" Type="FluxModel.Store.Ccys" Multiplicity="1" />
+          <End Role="Transactions" Type="FluxModel.Store.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ccys">
+              <PropertyRef Name="CCYId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CcyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Investments">
+          <End Role="Investments" Type="FluxModel.Store.Investments" Multiplicity="1" />
+          <End Role="Transactions" Type="FluxModel.Store.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investments">
+              <PropertyRef Name="InvestmentId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="InvestmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FluxModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FluxEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="FluxModel.C__MigrationHistory" />
+          <EntitySet Name="BusinessUnits" EntityType="FluxModel.BusinessUnit" />
+          <EntitySet Name="Ccys" EntityType="FluxModel.Ccy" />
+          <EntitySet Name="CcyXRates" EntityType="FluxModel.CcyXRate" />
+          <EntitySet Name="Investments" EntityType="FluxModel.Investment" />
+          <EntitySet Name="Lookups" EntityType="FluxModel.Lookup" />
+          <EntitySet Name="LookupTypes" EntityType="FluxModel.LookupType" />
+          <EntitySet Name="sysdiagrams" EntityType="FluxModel.sysdiagram" />
+          <EntitySet Name="Transactions" EntityType="FluxModel.Transaction" />
+          <AssociationSet Name="FK_Investments_BusinessUnits" Association="FluxModel.FK_Investments_BusinessUnits">
+            <End Role="BusinessUnits" EntitySet="BusinessUnits" />
+            <End Role="Investments" EntitySet="Investments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CcyXRates__CcyId__5DCAEF64" Association="FluxModel.FK__CcyXRates__CcyId__5DCAEF64">
+            <End Role="Ccys" EntitySet="Ccys" />
+            <End Role="CcyXRates" EntitySet="CcyXRates" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Transaction_Ccy" Association="FluxModel.fk_Transaction_Ccy">
+            <End Role="Ccys" EntitySet="Ccys" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Investments" Association="FluxModel.FK_Transactions_Investments">
+            <End Role="Investments" EntitySet="Investments" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lookups_LookupTypes" Association="FluxModel.FK_Lookups_LookupTypes">
+            <End Role="LookupTypes" EntitySet="LookupTypes" />
+            <End Role="Lookups" EntitySet="Lookups" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+          </Key>
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="BusinessUnit">
+          <Key>
+            <PropertyRef Name="BusinessUnitId" />
+          </Key>
+          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Manager" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Other" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Investments" Relationship="FluxModel.FK_Investments_BusinessUnits" FromRole="BusinessUnits" ToRole="Investments" />
+        </EntityType>
+        <EntityType Name="Ccy">
+          <Key>
+            <PropertyRef Name="CCYId" />
+          </Key>
+          <Property Name="CCYId" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="CcyISO" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="CcyXRates" Relationship="FluxModel.FK__CcyXRates__CcyId__5DCAEF64" FromRole="Ccys" ToRole="CcyXRates" />
+          <NavigationProperty Name="Transactions" Relationship="FluxModel.fk_Transaction_Ccy" FromRole="Ccys" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="CcyXRate">
+          <Key>
+            <PropertyRef Name="CCYXRateId" />
+            <PropertyRef Name="CcyId" />
+            <PropertyRef Name="DateXRate" />
+            <PropertyRef Name="XRate" />
+            <PropertyRef Name="DateTimeCreated" />
+            <PropertyRef Name="UserCreated" />
+            <PropertyRef Name="DateTimeUpdated" />
+            <PropertyRef Name="UserUpdated" />
+          </Key>
+          <Property Name="CCYXRateId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="CcyId" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="DateXRate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="XRate" Type="Decimal" Nullable="false" Precision="20" Scale="8" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Ccy" Relationship="FluxModel.FK__CcyXRates__CcyId__5DCAEF64" FromRole="CcyXRates" ToRole="Ccys" />
+        </EntityType>
+        <EntityType Name="Investment">
+          <Key>
+            <PropertyRef Name="InvestmentId" />
+          </Key>
+          <Property Name="InvestmentId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="BusinessUnitId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="Ccy" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateFirstDrawdown" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descr" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="BusinessUnit" Relationship="FluxModel.FK_Investments_BusinessUnits" FromRole="Investments" ToRole="BusinessUnits" />
+          <NavigationProperty Name="Transactions" Relationship="FluxModel.FK_Transactions_Investments" FromRole="Investments" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="Lookup">
+          <Key>
+            <PropertyRef Name="LookupId" />
+          </Key>
+          <Property Name="LookupId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="LookupTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Descr" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="LookupType" Relationship="FluxModel.FK_Lookups_LookupTypes" FromRole="Lookups" ToRole="LookupTypes" />
+        </EntityType>
+        <EntityType Name="LookupType">
+          <Key>
+            <PropertyRef Name="LookupTypeId" />
+          </Key>
+          <Property Name="LookupTypeId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Descr" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Lookups" Relationship="FluxModel.FK_Lookups_LookupTypes" FromRole="LookupTypes" ToRole="Lookups" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="InvestmentId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="LandmarkAmount" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="CcyId" Type="String" Nullable="false" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="DateTransfer" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TimingId" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="FundVehicleId" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="InvestmentAmount" Type="Decimal" Nullable="false" Precision="20" Scale="2" />
+          <Property Name="TransactionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CertaintyValueId" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="BoardApproved" Type="Int32" Nullable="false" />
+          <Property Name="FrequencyId" Type="Int32" Nullable="false" />
+          <Property Name="FrequencyDescr" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ReturnOfCapital" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="TaxPaid" Type="Int32" Nullable="false" />
+          <Property Name="GrossDistribution" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="Descr" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserCreated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DateTimeUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserUpdated" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ActualAmount" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="ActualCcy" Type="String" MaxLength="3" Unicode="true" FixedLength="false" />
+          <Property Name="ActualDateTransfer" Type="DateTime" Precision="0" />
+          <Property Name="Comments" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Ccy" Relationship="FluxModel.fk_Transaction_Ccy" FromRole="Transactions" ToRole="Ccys" />
+          <NavigationProperty Name="Investment" Relationship="FluxModel.FK_Transactions_Investments" FromRole="Transactions" ToRole="Investments" />
+        </EntityType>
+        <Association Name="FK_Investments_BusinessUnits">
+          <End Role="BusinessUnits" Type="FluxModel.BusinessUnit" Multiplicity="1" />
+          <End Role="Investments" Type="FluxModel.Investment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusinessUnits">
+              <PropertyRef Name="BusinessUnitId" />
+            </Principal>
+            <Dependent Role="Investments">
+              <PropertyRef Name="BusinessUnitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CcyXRates__CcyId__5DCAEF64">
+          <End Role="Ccys" Type="FluxModel.Ccy" Multiplicity="1" />
+          <End Role="CcyXRates" Type="FluxModel.CcyXRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ccys">
+              <PropertyRef Name="CCYId" />
+            </Principal>
+            <Dependent Role="CcyXRates">
+              <PropertyRef Name="CcyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Transaction_Ccy">
+          <End Role="Ccys" Type="FluxModel.Ccy" Multiplicity="1" />
+          <End Role="Transactions" Type="FluxModel.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ccys">
+              <PropertyRef Name="CCYId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="CcyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Investments">
+          <End Role="Investments" Type="FluxModel.Investment" Multiplicity="1" />
+          <End Role="Transactions" Type="FluxModel.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Investments">
+              <PropertyRef Name="InvestmentId" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="InvestmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lookups_LookupTypes">
+          <End Role="LookupTypes" Type="FluxModel.LookupType" Multiplicity="1" />
+          <End Role="Lookups" Type="FluxModel.Lookup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTypes">
+              <PropertyRef Name="LookupTypeId" />
+            </Principal>
+            <Dependent Role="Lookups">
+              <PropertyRef Name="LookupTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FluxModelStoreContainer" CdmEntityContainer="FluxEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="FluxModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusinessUnits">
+            <EntityTypeMapping TypeName="FluxModel.BusinessUnit">
+              <MappingFragment StoreEntitySet="BusinessUnits">
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Manager" ColumnName="Manager" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ccys">
+            <EntityTypeMapping TypeName="FluxModel.Ccy">
+              <MappingFragment StoreEntitySet="Ccys">
+                <ScalarProperty Name="CCYId" ColumnName="CCYId" />
+                <ScalarProperty Name="CcyISO" ColumnName="CcyISO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CcyXRates">
+            <EntityTypeMapping TypeName="FluxModel.CcyXRate">
+              <MappingFragment StoreEntitySet="CcyXRates">
+                <ScalarProperty Name="CCYXRateId" ColumnName="CCYXRateId" />
+                <ScalarProperty Name="CcyId" ColumnName="CcyId" />
+                <ScalarProperty Name="DateXRate" ColumnName="DateXRate" />
+                <ScalarProperty Name="XRate" ColumnName="XRate" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Investments">
+            <EntityTypeMapping TypeName="FluxModel.Investment">
+              <MappingFragment StoreEntitySet="Investments">
+                <ScalarProperty Name="InvestmentId" ColumnName="InvestmentId" />
+                <ScalarProperty Name="BusinessUnitId" ColumnName="BusinessUnitId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Ccy" ColumnName="Ccy" />
+                <ScalarProperty Name="DateFirstDrawdown" ColumnName="DateFirstDrawdown" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lookups">
+            <EntityTypeMapping TypeName="FluxModel.Lookup">
+              <MappingFragment StoreEntitySet="Lookups">
+                <ScalarProperty Name="LookupId" ColumnName="LookupId" />
+                <ScalarProperty Name="LookupTypeId" ColumnName="LookupTypeId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LookupTypes">
+            <EntityTypeMapping TypeName="FluxModel.LookupType">
+              <MappingFragment StoreEntitySet="LookupTypes">
+                <ScalarProperty Name="LookupTypeId" ColumnName="LookupTypeId" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FluxModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="FluxModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="InvestmentId" ColumnName="InvestmentId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="LandmarkAmount" ColumnName="LandmarkAmount" />
+                <ScalarProperty Name="CcyId" ColumnName="CcyId" />
+                <ScalarProperty Name="DateTransfer" ColumnName="DateTransfer" />
+                <ScalarProperty Name="TimingId" ColumnName="TimingId" />
+                <ScalarProperty Name="FundVehicleId" ColumnName="FundVehicleId" />
+                <ScalarProperty Name="InvestmentAmount" ColumnName="InvestmentAmount" />
+                <ScalarProperty Name="TransactionTypeId" ColumnName="TransactionTypeId" />
+                <ScalarProperty Name="CertaintyValueId" ColumnName="CertaintyValueId" />
+                <ScalarProperty Name="BoardApproved" ColumnName="BoardApproved" />
+                <ScalarProperty Name="FrequencyId" ColumnName="FrequencyId" />
+                <ScalarProperty Name="FrequencyDescr" ColumnName="FrequencyDescr" />
+                <ScalarProperty Name="ReturnOfCapital" ColumnName="ReturnOfCapital" />
+                <ScalarProperty Name="TaxPaid" ColumnName="TaxPaid" />
+                <ScalarProperty Name="GrossDistribution" ColumnName="GrossDistribution" />
+                <ScalarProperty Name="Descr" ColumnName="Descr" />
+                <ScalarProperty Name="DateTimeCreated" ColumnName="DateTimeCreated" />
+                <ScalarProperty Name="UserCreated" ColumnName="UserCreated" />
+                <ScalarProperty Name="DateTimeUpdated" ColumnName="DateTimeUpdated" />
+                <ScalarProperty Name="UserUpdated" ColumnName="UserUpdated" />
+                <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+                <ScalarProperty Name="ActualCcy" ColumnName="ActualCcy" />
+                <ScalarProperty Name="ActualDateTransfer" ColumnName="ActualDateTransfer" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="589e3708dd324c9387f4aa209e7470e9" Name="Diagram1">
+        <EntityTypeShape EntityType="FluxModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.BusinessUnit" Width="1.5" PointX="1.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.Ccy" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.CcyXRate" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.Investment" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.Lookup" Width="1.5" PointX="11" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.LookupType" Width="1.5" PointX="8.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.sysdiagram" Width="1.5" PointX="2.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FluxModel.Transaction" Width="1.5" PointX="6" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="FluxModel.FK_Investments_BusinessUnits" ManuallyRouted="false" />
+        <AssociationConnector Association="FluxModel.FK__CcyXRates__CcyId__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="FluxModel.fk_Transaction_Ccy" ManuallyRouted="false" />
+        <AssociationConnector Association="FluxModel.FK_Transactions_Investments" ManuallyRouted="false" />
+        <AssociationConnector Association="FluxModel.FK_Lookups_LookupTypes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

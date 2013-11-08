@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Flux.Models.BusinessUnit>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Manager)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Other)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserUpdated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Manager)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Other)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserUpdated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BusinessUnitId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BusinessUnitId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BusinessUnitId })
+        </td>
+    </tr>
+}
+
+</table>

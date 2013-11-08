@@ -44,6 +44,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -182,12 +184,56 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BusinessUnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BusinessUnit.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ccy.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CcyXRate.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flux.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flux.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flux.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Flux.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Flux.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FluxContext.cs" />
+    <Compile Include="Models\Investment.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lookup.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LookupType.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Transaction.cs">
+      <DependentUpon>Flux.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,6 +293,23 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\Flux.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Flux.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Flux.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Flux.edmx</DependentUpon>
+      <LastGenOutput>Flux.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Flux.edmx.diagram">
+      <DependentUpon>Flux.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Flux.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Flux.edmx</DependentUpon>
+      <LastGenOutput>Flux.cs</LastGenOutput>
+    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -301,12 +364,20 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\BusinessUnit\Index.cshtml" />
+    <Content Include="Views\BusinessUnit\Details.cshtml" />
+    <Content Include="Views\BusinessUnit\Create.cshtml" />
+    <Content Include="Views\BusinessUnit\Edit.cshtml" />
+    <Content Include="Views\BusinessUnit\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
