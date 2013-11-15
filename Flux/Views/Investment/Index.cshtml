@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Flux.Models.Investment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessUnit.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ccy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFirstDrawdown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTimeUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserUpdated)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessUnit.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ccy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFirstDrawdown)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTimeUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserUpdated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.InvestmentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.InvestmentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.InvestmentId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,85 @@
+﻿@model Flux.Models.Investment
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Investment</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.BusinessUnit.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BusinessUnit.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Amount)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Amount)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Ccy)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Ccy)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateFirstDrawdown)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateFirstDrawdown)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Descr)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Descr)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTimeCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTimeCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserCreated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserCreated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTimeUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTimeUpdated)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserUpdated)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserUpdated)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.InvestmentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

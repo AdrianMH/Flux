@@ -18,5 +18,7 @@ namespace Flux.Models
         }
 
         public DbSet<BusinessUnit> BusinessUnits { get; set; }
+
+        public DbSet<Investment> Investments { get; set; }
     }
 }

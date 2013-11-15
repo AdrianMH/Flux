@@ -1,0 +1,110 @@
+﻿@model Flux.Models.Investment
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Investment</legend>
+
+        @Html.HiddenFor(model => model.InvestmentId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BusinessUnitId, "BusinessUnit")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("BusinessUnitId", String.Empty)
+            @Html.ValidationMessageFor(model => model.BusinessUnitId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Amount)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ccy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ccy)
+            @Html.ValidationMessageFor(model => model.Ccy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateFirstDrawdown)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateFirstDrawdown)
+            @Html.ValidationMessageFor(model => model.DateFirstDrawdown)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Descr)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Descr)
+            @Html.ValidationMessageFor(model => model.Descr)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateTimeCreated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateTimeCreated)
+            @Html.ValidationMessageFor(model => model.DateTimeCreated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserCreated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserCreated)
+            @Html.ValidationMessageFor(model => model.UserCreated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateTimeUpdated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateTimeUpdated)
+            @Html.ValidationMessageFor(model => model.DateTimeUpdated)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserUpdated)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserUpdated)
+            @Html.ValidationMessageFor(model => model.UserUpdated)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
